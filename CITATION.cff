@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "uPULLI-I: interpretable high-throughput bacterial phenotyping from brightfield timelapse microscopy"
+abstract: >-
+  A high-throughput pipeline for automated brightfield timelapse microscopy of
+  96-well plates. Processes per-well TIFF stacks through registration,
+  segmentation, colony tracking, and colony/whole-image feature extraction, with
+  a PySide6 GUI and headless CLI tools.
+type: software
+version: 1.0.0
+date-released: 2026-07-27
+license: MIT
+repository-code: "https://github.com/BridgesLabCMU/uPULLI-I"
+authors:
+  - family-names: Mellick
+    given-names: "Seh Na S."
+    email: sehna@cmu.edu
+    affiliation: "Carnegie Mellon University"
+    orcid: "https://orcid.org/0000-0002-3840-4567"
+  - family-names: Derringer
+    given-names: "Jesse J."
+    email: jessederringer@cmu.edu
+    affiliation: "Carnegie Mellon University"
+  - family-names: Bridges
+    given-names: "Andrew A."
+    email: bridges@cmu.edu
+    affiliation: "Carnegie Mellon University"
+  
+keywords:
+  - biofilm
+  - microscopy
+  - image-analysis
+  - phenotyping
+  - colony-tracking
+
