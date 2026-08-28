@@ -427,4 +427,4 @@ For an archival, fully-solved lock (all transitive deps, per-platform), generate
 **Authors:** Seh Na Mellick, Jojo Prentice, Andrew Bridges
 CMU Ray and Stephanie Lane Computational Biology Department · CMU Department of Biological Sciences
 
-**License:** [MIT](LICENSE)
+**License:** Apache License 2.0. Copyright (c) 2026 Carnegie Mellon University — full text in [`LICENSE`](LICENSE), with [`NOTICE`](NOTICE).
