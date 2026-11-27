@@ -314,3 +314,26 @@ def test_wholeImage_features_identical_for_uint16(tmp_path):
     u = loadProcessedStack(str(tmp_path / 'u.tif'))
     for t in range(f.shape[0]):
         assert extractFrameFeats(np.asarray(f[t])) == extractFrameFeats(np.asarray(u[t]))
+
+
+def test_limitThreads_caps_blas_and_openmp():
+    from threadpoolctl import threadpool_info, threadpool_limits
+    from multiWellAnalysis.processing.helpers import limitThreads
+    with threadpool_limits(limits=None):
+        limitThreads()
+        assert all(p['num_threads'] == 1 for p in threadpool_info()), threadpool_info()
+
+
+def test_cli_import_is_single_threaded():
+    """Importing the CLI (which runs the package __init__ first) must leave every
+    BLAS/OpenMP pool at one thread, so --workers N uses N cores."""
+    import json, os, subprocess, sys
+    env = {k: v for k, v in os.environ.items()
+           if not k.endswith('_NUM_THREADS') and k != 'VECLIB_MAXIMUM_THREADS'}
+    code = ('import json, multiWellAnalysis.cli.run_pipeline\n'
+            'from threadpoolctl import threadpool_info\n'
+            'print(json.dumps([[p["internal_api"], p["num_threads"]] for p in threadpool_info()]))')
+    out = subprocess.run([sys.executable, '-c', code], env=env, capture_output=True,
+                         text=True, check=True).stdout.strip().splitlines()[-1]
+    pools = json.loads(out)
+    assert pools and all(n == 1 for _, n in pools), pools
